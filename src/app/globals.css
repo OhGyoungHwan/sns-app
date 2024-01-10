@@ -1,5 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 @tailwind base;
 @tailwind components;
+
+.textDisplayLarge {
+  @apply font-normal text-[57px] leading-[64px] tracking-[-0.25px];
+}
+
+.textDisplayMedium {
+  @apply font-normal text-[45px] leading-[52px] tracking-normal;
+}
+
+.textDisplaySmall {
+  @apply font-normal text-[36px] leading-[44px] tracking-normal;
+}
+
+.textHeadlineLarge {
+  @apply font-normal text-[32px] leading-[40px] tracking-normal;
+}
+
+.textHeadlineMedium {
+  @apply font-normal text-[28px] leading-[36px] tracking-normal;
+}
+
+.textHeadlineSmall {
+  @apply font-normal text-[24px] leading-[32px] tracking-normal;
+}
+
+.textTitleLarge {
+  @apply font-normal text-[22px] leading-[28px] tracking-normal;
+}
+
+.textTitleMedium {
+  @apply font-medium text-[16px] leading-[24px] tracking-[0.15px];
+}
+
+.textTitleSmall {
+  @apply font-medium text-[14px] leading-[20px] tracking-[0.1px];
+}
+
+.textBodyLarge {
+  @apply font-normal text-[16px] leading-[24px] tracking-[0.5px];
+}
+
+.textBodyMedium {
+  @apply font-normal text-[14px] leading-[20px] tracking-[0.25px];
+}
+
+.textBodySmall {
+  @apply font-normal text-[12px] leading-[16px] tracking-[0.4px];
+}
+
+.textLabelLarge {
+  @apply font-medium text-[14px] leading-[20px] tracking-[0.1px];
+}
+
+.textLabelLargeProminent {
+  @apply font-bold text-[14px] leading-[20px] tracking-[0.1px];
+}
+
+.textLabelMedium {
+  @apply font-medium text-[12px] leading-[16px] tracking-[0.5px];
+}
+
+.textLabelMediumProminent {
+  @apply font-bold text-[12px] leading-[16px] tracking-[0.5px];
+}
+
+.textLabelSmall {
+  @apply font-medium text-[11px] leading-[16px] tracking-[0.5px];
+}
+
 @tailwind utilities;
 
 :root {

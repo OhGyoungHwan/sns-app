@@ -1,20 +1,75 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    colors: {
+      primary: "#FFB4AB",
+      surfaceTint: "#FFB4AB",
+      onPrimary: "#561E19",
+      primaryContainer: "#73332E",
+      onPrimaryContainer: "#FFDAD6",
+      secondary: "#E7BDB8",
+      onSecondary: "#442926",
+      secondaryContainer: "#5D3F3C",
+      onSecondaryContainer: "#FFDAD6",
+      tertiary: "#E0C38C",
+      onTertiary: "#3F2E04",
+      tertiaryContainer: "#584419",
+      onTertiaryContainer: "#FDDFA6",
+      error: "#FFB4AB",
+      onError: "#690005",
+      errorContainer: "#93000A",
+      onErrorContainer: "#FFDAD6",
+      background: "#1A1110",
+      onBackground: "#F1DEDC",
+      surface: "#1A1110",
+      onSurface: "#F1DEDC",
+      surfaceVariant: "#534341",
+      onSurfaceVariant: "#D8C2BF",
+      outline: "#A08C8A",
+      outlineVariant: "#534341",
+      shadow: "#000000",
+      scrim: "#000000",
+      inverseSurface: "#F1DEDC",
+      inverseOnSurface: "#392E2D",
+      inversePrimary: "#904A43",
+      primaryFixed: "#FFDAD6",
+      onPrimaryFixed: "#3B0907",
+      primaryFixedDim: "#FFB4AB",
+      onPrimaryFixedVariant: "#73332E",
+      secondaryFixed: "#FFDAD6",
+      onSecondaryFixed: "#2C1513",
+      secondaryFixedDim: "#E7BDB8",
+      onSecondaryFixedVariant: "#5D3F3C",
+      tertiaryFixed: "#FDDFA6",
+      onTertiaryFixed: "#261900",
+      tertiaryFixedDim: "#E0C38C",
+      onTertiaryFixedVariant: "#584419",
+      surfaceDim: "#1A1110",
+      surfaceBright: "#423735",
+      surfaceContainerLowest: "#140C0B",
+      surfaceContainerLow: "#231918",
+      surfaceContainer: "#271D1C",
+      surfaceContainerHigh: "#322826",
+      surfaceContainerHighest: "#3D3231",
+    },
+    screens: {
+      medium: "600px",
+      expanded: "840px",
+    },
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
   plugins: [],
-}
-export default config
+};
+export default config;
