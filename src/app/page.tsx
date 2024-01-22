@@ -16,10 +16,10 @@ async function getPost() {
 }
 
 export default async function Home() {
-  const posts = (await getPost()) as IPost[];
+  // const posts = (await getPost()) as IPost[];
   return (
     <div className="flex flex-col items-center gap-4 justify-items-stretch">
-      {posts.map((post) => (
+      {/* {posts.map((post) => (
         <Card
           key={post.id}
           CardHeader={
@@ -37,7 +37,7 @@ export default async function Home() {
             />
           }
         />
-      ))}
+      ))} */}
     </div>
   );
 }
