@@ -9,12 +9,9 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 async function getComment(postId: string) {
-  const res = await fetch(
-    `${process.env.BASE_URL}/api/comment?postId=${postId}`,
-    {
-      next: { revalidate: 600 },
-    }
-  );
+  const res = await fetch(`/api/comment?postId=${postId}`, {
+    next: { revalidate: 600 },
+  });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -35,7 +32,7 @@ const CardBody: React.FC<{ postId: string; HTMLContent: React.ReactNode }> = ({
   const submitData = async () => {
     try {
       const body = { postId: postId, content: comment };
-      await fetch(`${process.env.BASE_URL}/api/comment`, {
+      await fetch(`/api/comment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
