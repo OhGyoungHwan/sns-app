@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
-import TopAppBar from "./components/TopAppBar";
-import BottomAppBar from "./components/BottomAppBar";
+import Providers from "./lib/Provider";
+import TopAppBar from "./components/organism/topappbar/TopAppBar";
+import BottomAppBar from "./components/organism/bottomappbar/BottomAppBar";
 
 const notoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -19,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={notoSansKR.className}>
-        <TopAppBar />
-        <main className="mt-[16px] px-[16px]">{children}</main>
-        <BottomAppBar />
+        <Providers>
+          <TopAppBar />
+          <main className="px-[16px] pt-[58px] pb-[60px]">{children}</main>
+          <BottomAppBar />
+        </Providers>
       </body>
     </html>
   );

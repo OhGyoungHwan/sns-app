@@ -8,8 +8,16 @@ select {
   appearance: none; /* Remove default arrow */
 }
 
+.quill {
+  @apply h-full flex flex-col !important;
+}
+
 .ql-picker {
   @apply text-onSurface !important;
+}
+
+.ql-container {
+  @apply grow;
 }
 
 .ql-toolbar.ql-snow {
@@ -18,10 +26,6 @@ select {
 
 .ql-container.ql-snow {
   @apply border-outline rounded-b !important;
-}
-
-.ql-editor {
-  @apply min-h-[40vh];
 }
 
 .ql-snow.ql-toolbar button:hover .ql-stroke,

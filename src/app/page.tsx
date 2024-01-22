@@ -1,17 +1,42 @@
-import HorizontalCard from "./components/HorizontalCard";
-import SegmentedButton from "./components/SegmentedButton";
-import Swiper from "./components/Swiper";
+import { IPost } from "./api/post/route";
+import HTMLContent from "./components/molecules/HTMLContent";
+import TitleCategory from "./components/molecules/TitleCategory";
+import Card from "./components/organism/card/Card";
+import CardBody from "./components/organism/card/CardBody";
+import CardHeader from "./components/organism/card/CardHeader";
 
-export default function Home() {
-  const tempData = [...Array(5).keys()].map((i) => i);
-  const tempData2 = [...Array(5).keys()].map((i) => (
-    <SegmentedButton key={i} isCheck={i == 0} />
-  ));
+async function getPost() {
+  const res = await fetch("http://localhost:3000/api/post", {
+    next: { revalidate: 600 },
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+
+export default async function Home() {
+  const posts = (await getPost()) as IPost[];
   return (
-    <div className="flex flex-col gap-4">
-      <Swiper SwiperSlideList={tempData2} />
-      {tempData.map((i) => (
-        <HorizontalCard key={i} isFold={i != 0} />
+    <div className="flex flex-col items-center gap-4 justify-items-stretch">
+      {posts.map((post) => (
+        <Card
+          key={post.id}
+          CardHeader={
+            <CardHeader
+              post={post}
+              TitleCategory={
+                <TitleCategory title={post.title} category={post.category} />
+              }
+            />
+          }
+          CardBody={
+            <CardBody
+              postId={post.id}
+              HTMLContent={<HTMLContent content={post.content} />}
+            />
+          }
+        />
       ))}
     </div>
   );

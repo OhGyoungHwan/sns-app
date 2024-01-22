@@ -1,16 +1,5 @@
-import Quill from "../components/Quill";
-import Select from "../components/Select";
-import Snackbar from "../components/Snackbar";
-import TextFields from "../components/TextFields";
-import "react-quill/dist/quill.snow.css";
+import PostCard from "../components/organism/write/PostCard";
 
-export default function Home() {
-  return (
-    <div className="flex flex-col gap-4">
-      <Select />
-      <TextFields />
-      <Quill />
-      <Snackbar />
-    </div>
-  );
+export default function Create() {
+  return <PostCard />;
 }
