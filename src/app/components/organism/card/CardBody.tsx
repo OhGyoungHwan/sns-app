@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 async function getComment(postId: string) {
   const res = await fetch(
-    `http://localhost:3000/api/comment?postId=${postId}`,
+    `${process.env.BASE_URL}/api/comment?postId=${postId}`,
     {
       next: { revalidate: 600 },
     }
@@ -35,7 +35,7 @@ const CardBody: React.FC<{ postId: string; HTMLContent: React.ReactNode }> = ({
   const submitData = async () => {
     try {
       const body = { postId: postId, content: comment };
-      await fetch("/api/comment", {
+      await fetch(`${process.env.BASE_URL}/api/comment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

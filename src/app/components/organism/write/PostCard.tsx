@@ -26,7 +26,7 @@ const PostCard: React.FC = () => {
       let els = document.createElement("div");
       els.innerHTML = content;
       console.log(els.getElementsByTagName("img"));
-      await fetch("/api/post", {
+      await fetch(`${process.env.BASE_URL}/api/post`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

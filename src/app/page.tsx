@@ -6,7 +6,7 @@ import CardBody from "./components/organism/card/CardBody";
 import CardHeader from "./components/organism/card/CardHeader";
 
 async function getPost() {
-  const res = await fetch("http://localhost:3000/api/post", {
+  const res = await fetch(`${process.env.BASE_URL}/api/post`, {
     next: { revalidate: 600 },
   });
   if (!res.ok) {
