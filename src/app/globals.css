@@ -8,6 +8,14 @@ select {
   appearance: none; /* Remove default arrow */
 }
 
+.swiper-slide.swiper-auto {
+  width: auto !important;
+}
+
+.swiper-pagination.swiper-pagination-fraction {
+  @apply hidden group-hover:block;
+}
+
 .quill {
   @apply h-full flex flex-col !important;
 }
@@ -17,7 +25,11 @@ select {
 }
 
 .ql-container {
-  @apply grow;
+  @apply grow relative;
+}
+
+.ql-editor {
+  @apply absolute inset-0;
 }
 
 .ql-toolbar.ql-snow {
@@ -109,10 +121,6 @@ select {
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
   @apply text-primary !important;
-}
-
-.swiper-slide {
-  width: auto !important;
 }
 
 .textDisplayLarge {

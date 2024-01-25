@@ -15,15 +15,13 @@ const TextButton: React.FC<{
 }) => {
   return (
     <button
-      className={`flex flex-col justify-center items-center overflow-hidden rounded-sm ${bgColor} ${
+      className={`flex flex-col justify-center items-center overflow-hidden rounded-[100px] ${bgColor} ${
         border && "border border-outline"
       } ${className}`}
       onClick={onClickEvent}
     >
       <div className="flex justify-center items-center self-stretch relative gap-2 px-3 py-2.5">
-        <p
-          className={`textLabelLargeProminent text-center text-nowrap ${color}`}
-        >
+        <p className={`textTitleSmall text-center text-nowrap ${color}`}>
           {text}
         </p>
       </div>

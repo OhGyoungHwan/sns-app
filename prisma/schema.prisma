@@ -12,10 +12,12 @@ datasource db {
 }
 
 enum Category {
-  GAME
-  YOUTUBE
-  SOCCER
   ETC
+  MUSIC
+  MOVIE
+  GAME
+  SPORTS
+  LEARNING
 }
 
 model Post {
@@ -23,11 +25,13 @@ model Post {
   category  Category @default(ETC)
   title     String
   content   String
+  videoId String
   // 임시 저장 구분 용
   published Boolean @default(false)
   author    User?   @relation(fields: [authorId], references: [id])
   authorId  String?
   comments Comment[]
+  Likes Like[]
 }
 
 model Comment {
@@ -35,6 +39,14 @@ model Comment {
   userId             String
   postId         String
   content String
+  user User @relation(fields:[userId], references:[id], onDelete: Cascade)
+  post Post @relation(fields:[postId], references:[id], onDelete: Cascade)
+}
+
+model Like {
+  id String @default(cuid()) @id
+  userId String
+  postId String
   user User @relation(fields:[userId], references:[id], onDelete: Cascade)
   post Post @relation(fields:[postId], references:[id], onDelete: Cascade)
 }
@@ -77,6 +89,7 @@ model User {
   image         String?
   comments      Comment[] 
   posts         Post[]
+  likes Like[]
   accounts      Account[]
   sessions      Session[]
 }

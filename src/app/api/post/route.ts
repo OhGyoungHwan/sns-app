@@ -1,14 +1,16 @@
 import { authOptions } from "@/app/lib/authOptions";
 import prisma from "@/app/lib/prisma";
+import { Category } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export interface IPost {
   id: string;
-  category: string;
+  category: Category;
   title: string;
   content: string;
   published: boolean;
+  videoId: string;
   authorId: string | null;
   author: {
     name: string | null;
@@ -21,7 +23,7 @@ export interface IPost {
 
 // Create
 export async function POST(req: NextRequest) {
-  const { title, content, category } = await req.json();
+  const { title, content, category, videoId } = await req.json();
 
   const session = await getServerSession(authOptions);
 
@@ -30,6 +32,7 @@ export async function POST(req: NextRequest) {
       title: title,
       category: category,
       content: content,
+      videoId: videoId,
       author: { connect: { id: session?.user.id } },
     },
   });
@@ -39,19 +42,14 @@ export async function POST(req: NextRequest) {
 // Read
 export async function GET() {
   const posts = await prisma.post.findMany({
-    include: {
-      comments: {
-        select: {
-          userId: true,
-          content: true,
-        },
-      },
-      author: {
-        select: {
-          name: true,
-        },
-      },
+    select: {
+      id: true,
+      category: true,
+      title: true,
+      videoId: true,
     },
+    skip: 0,
+    take: 10,
   });
   return NextResponse.json(posts);
 }

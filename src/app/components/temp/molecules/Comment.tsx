@@ -1,4 +1,4 @@
-import Monogram from "../atoms/Monogram";
+import Monogram from "../../atoms/Monogram";
 
 const Comment: React.FC<{ name: string; comment: string }> = ({
   name,

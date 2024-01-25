@@ -1,7 +1,7 @@
 "use client";
 import { IPost } from "@/app/api/post/route";
 import IconButton from "../../atoms/IconButton";
-import Monogram from "../../atoms/Monogram";
+import Monogram from "../../../atoms/Monogram";
 import Dialog from "../../molecules/Dialog";
 import SnackBar from "../../molecules/SnackBar";
 import { useRouter } from "next/navigation";

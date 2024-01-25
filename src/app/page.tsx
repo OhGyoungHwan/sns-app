@@ -1,13 +1,14 @@
 import { IPost } from "./api/post/route";
-import HTMLContent from "./components/molecules/HTMLContent";
-import TitleCategory from "./components/molecules/TitleCategory";
-import Card from "./components/organism/card/Card";
-import CardBody from "./components/organism/card/CardBody";
-import CardHeader from "./components/organism/card/CardHeader";
+import Card from "./components/organism/Card";
+// import HTMLContent from "./components/molecules/HTMLContent";
+// import TitleCategory from "./components/molecules/TitleCategory";
+// import Card from "./components/organism/card/Card";
+// import CardBody from "./components/organism/card/CardBody";
+// import CardHeader from "./components/organism/card/CardHeader";
 
 async function getPost() {
   const res = await fetch(`${process.env.BASE_URL}/api/post`, {
-    next: { revalidate: 600 },
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -20,23 +21,7 @@ export default async function Home() {
   return (
     <div className="flex flex-col items-center gap-4 justify-items-stretch">
       {posts.map((post) => (
-        <Card
-          key={post.id}
-          CardHeader={
-            <CardHeader
-              post={post}
-              TitleCategory={
-                <TitleCategory title={post.title} category={post.category} />
-              }
-            />
-          }
-          CardBody={
-            <CardBody
-              postId={post.id}
-              HTMLContent={<HTMLContent content={post.content} />}
-            />
-          }
-        />
+        <Card key={post.id} post={post} />
       ))}
     </div>
   );

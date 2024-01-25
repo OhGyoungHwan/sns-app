@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import Providers from "./lib/Provider";
-import TopAppBar from "./components/organism/topappbar/TopAppBar";
-import BottomAppBar from "./components/organism/bottomappbar/BottomAppBar";
+import NavigationRail from "./components/organism/Navigation/NavigationRail";
+import NavigationLayout from "./components/organism/Navigation/NavigationLayout";
 
 const notoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "DongHaeSNS",
-  description: "간편이용 동해 SNS",
+  title: "유튭뭐봄?",
+  description: "유튜브 영상 관리 공유 사이트",
 };
 
 export default function RootLayout({
@@ -21,9 +21,15 @@ export default function RootLayout({
     <html lang="ko">
       <body className={notoSansKR.className}>
         <Providers>
-          <TopAppBar />
-          <main className="px-[16px] pt-[58px] pb-[60px]">{children}</main>
-          <BottomAppBar />
+          <div
+            id="modal"
+            className="hidden fixed inset-0 z-40 bg-surface opacity-50"
+          />
+          <NavigationLayout />
+          <main className="relative px-[16px] pt-[56px] min-h-[calc(100vh-56px)] w-full h-full">
+            {children}
+          </main>
+          {/* <BottomAppBar /> */}
         </Providers>
       </body>
     </html>
