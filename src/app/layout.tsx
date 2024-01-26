@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import Providers from "./lib/Provider";
-import NavigationLayout from "./components/organism/navigation/NavigationLayout";
 import Footer from "./components/organism/Footer";
+import NavigationLayout from "./components/organism/navigation/NavigationLayout";
 
 const notoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 
