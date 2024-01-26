@@ -13,7 +13,7 @@ select {
 }
 
 .swiper-pagination.swiper-pagination-fraction {
-  @apply hidden group-hover:block;
+  @apply hidden group-hover:block pointer-events-none;
 }
 
 .quill {

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import Providers from "./lib/Provider";
-import NavigationRail from "./components/organism/Navigation/NavigationRail";
-import NavigationLayout from "./components/organism/Navigation/NavigationLayout";
+import NavigationLayout from "./components/organism/navigation/NavigationLayout";
+import Footer from "./components/organism/Footer";
 
 const notoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -29,8 +29,8 @@ export default function RootLayout({
           <main className="relative px-[16px] pt-[56px] min-h-[calc(100vh-56px)] w-full h-full">
             {children}
           </main>
-          {/* <BottomAppBar /> */}
         </Providers>
+        <Footer />
       </body>
     </html>
   );

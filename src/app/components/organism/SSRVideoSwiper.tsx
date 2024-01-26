@@ -26,8 +26,14 @@ const SSRVideoSwiper: React.FC<{ slideElementList: React.ReactNode[] }> = ({
     };
     window.addEventListener("resize", resizeListener);
   });
+  useEffect(() => {
+    (window.innerWidth - 32) / 16 > (window.innerHeight - 56) / 9
+      ? setIsRow(true)
+      : setIsRow(false);
+  }, []);
   return (
     <Swiper
+      id="SSRVideoSwiper"
       ref={swiperRef}
       pagination={{
         type: "fraction",

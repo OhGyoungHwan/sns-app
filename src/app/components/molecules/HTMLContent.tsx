@@ -9,7 +9,7 @@ const HTMLContent: React.FC<{ content: string }> = ({ content }) => {
           content
         ),
       }}
-      className="break-words self-stretch w-full text-wrap text-onSurfaceVariant"
+      className="break-words self-stretch text-wrap text-onSurfaceVariant"
     />
   );
 };
