@@ -28,6 +28,21 @@ export async function GET(
     where: {
       id: params.postId,
     },
+    select: {
+      id: true,
+      category: true,
+      title: true,
+      content: true,
+      published: true,
+      videoId: true,
+      authorId: true,
+      author: {
+        select: {
+          name: true,
+          id: true,
+        },
+      },
+    },
   });
   return NextResponse.json(posts);
 }

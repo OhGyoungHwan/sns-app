@@ -20,13 +20,18 @@ const MyPage: React.FC = () => {
     submitData(body);
   };
   return (
-    <article className="flex flex-row justify-center items-center p-4 w-full">
-      <TextField label="이름 변경" text={name} changeText={changeName} />
-      <TextButton
-        text="변경"
-        color="text-onSurface"
-        onClickEvent={onClickSubmit}
-      />
+    <article className="w-full max-w-[840px] flex flex-col justify-start items-center gap-4 mx-auto">
+      <h1 className="textTitleMedium text-onSurface">내 정보</h1>
+      <div className="w-full flex flex-row p-4">
+        <TextField label="이름 변경" text={name} changeText={changeName} />
+        <TextButton
+          text="변경"
+          color="text-onSurface"
+          border
+          className="h-[56px]"
+          onClickEvent={onClickSubmit}
+        />
+      </div>
     </article>
   );
 };

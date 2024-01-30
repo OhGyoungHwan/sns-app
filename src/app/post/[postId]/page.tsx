@@ -6,7 +6,7 @@ import { getServerSession } from "next-auth";
 
 async function getPost(postId: string) {
   const res = await fetch(`${process.env.BASE_URL}/api/post/${postId}`, {
-    next: { revalidate: 3600 },
+    next: { revalidate: 60 },
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -16,7 +16,7 @@ async function getPost(postId: string) {
 
 async function getComments(postId: string) {
   const res = await fetch(`${process.env.BASE_URL}/api/comment/${postId}`, {
-    next: { revalidate: 3600 },
+    next: { revalidate: 60 },
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");

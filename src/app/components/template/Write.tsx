@@ -27,10 +27,10 @@ const Write: React.FC<{
   defaultCategory?: Category;
   defaultContent?: string;
 }> = ({
+  defaultYouTubeUrl,
   postId = "",
   isReWrite = false,
   defaultTitle = "",
-  defaultYouTubeUrl = "",
   defaultCategory = "MUSIC",
   defaultContent = "",
 }) => {
@@ -71,8 +71,8 @@ const Write: React.FC<{
   const onClickCancel = () => router.push("/");
   useEffect(() => {
     // rewrite시 초기값 세팅
-    const defaultYouTubeUrls = defaultYouTubeUrl.split("/");
-    setYouTubeIds(defaultYouTubeUrls);
+    const defaultYouTubeUrls = defaultYouTubeUrl?.split("/");
+    defaultYouTubeUrls && setYouTubeIds(defaultYouTubeUrls);
   }, [defaultYouTubeUrl]);
 
   return (

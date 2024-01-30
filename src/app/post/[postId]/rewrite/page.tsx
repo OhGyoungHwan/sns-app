@@ -3,7 +3,7 @@ import Write from "@/app/components/template/Write";
 
 async function getPost(postId: string) {
   const res = await fetch(`${process.env.BASE_URL}/api/post/${postId}`, {
-    next: { revalidate: 3600 },
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
