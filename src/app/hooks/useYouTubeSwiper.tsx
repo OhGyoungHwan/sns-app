@@ -62,5 +62,5 @@ export default function useYouTubeSwiper() {
   };
 
   // 액션
-  return { makeYouTubeSwiper, addYouTubeSwiper, youTubeIds };
+  return { makeYouTubeSwiper, addYouTubeSwiper, setYouTubeIds, youTubeIds };
 }

@@ -1,5 +1,5 @@
 import { IPost } from "./api/post/route";
-import Card from "./components/organism/Card";
+import Cards from "./components/template/Cards";
 
 async function getPost() {
   const res = await fetch(`${process.env.BASE_URL}/api/post`, {
@@ -13,11 +13,5 @@ async function getPost() {
 
 export default async function Home() {
   const posts = (await getPost()) as IPost[];
-  return (
-    <article className="w-full expanded:w-[840px] flex flex-col items-center gap-4 mx-auto">
-      {posts.map((post) => (
-        <Card key={post.id} post={post} />
-      ))}
-    </article>
-  );
+  return <Cards posts={posts} />;
 }

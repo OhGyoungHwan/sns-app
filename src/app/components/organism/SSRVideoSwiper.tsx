@@ -32,27 +32,31 @@ const SSRVideoSwiper: React.FC<{ slideElementList: React.ReactNode[] }> = ({
       : setIsRow(false);
   }, []);
   return (
-    <Swiper
-      id="SSRVideoSwiper"
-      ref={swiperRef}
-      pagination={{
-        type: "fraction",
-      }}
-      modules={[Pagination]}
-      className={`group relative aspect-video ${
-        isRow ? "h-[calc(100vh-56px)]" : "w-[calc(100vw-32px)]"
-      }`}
-    >
-      {slideElementList.map((element, idx) => (
-        <SwiperSlide key={`YouTube-${idx}`}>{element}</SwiperSlide>
-      ))}
-      <div className="hidden group-hover:block absolute left-0 top-1/2 -translate-y-1/2 border-[2px] border-outline rounded-[100px] z-40">
-        <IconButton iconName="arrow_back" onClickEvent={onClickPrev} />
-      </div>
-      <div className="hidden group-hover:block absolute right-0 top-1/2 -translate-y-1/2 border-[2px] border-outline rounded-[100px] z-40">
-        <IconButton iconName="arrow_forward" onClickEvent={onClickNext} />
-      </div>
-    </Swiper>
+    <>
+      <Swiper
+        id="SSRVideoSwiper"
+        ref={swiperRef}
+        pagination={{
+          type: "fraction",
+        }}
+        modules={[Pagination]}
+        className={`z-30 group aspect-video mt-[50px] ${
+          isRow ? "h-[100vh]" : "w-[96vw]"
+        }`}
+        style={{ position: "absolute" }}
+      >
+        {slideElementList.map((element, idx) => (
+          <SwiperSlide key={`YouTube-${idx}`}>{element}</SwiperSlide>
+        ))}
+        <div className="hidden group-hover:block absolute left-0 top-1/2 -translate-y-1/2 border-[2px] border-outline rounded-[100px] z-40">
+          <IconButton iconName="arrow_back" onClickEvent={onClickPrev} />
+        </div>
+        <div className="hidden group-hover:block absolute right-0 top-1/2 -translate-y-1/2 border-[2px] border-outline rounded-[100px] z-40">
+          <IconButton iconName="arrow_forward" onClickEvent={onClickNext} />
+        </div>
+      </Swiper>
+      <div className={`aspect-video ${isRow ? "h-[100vh]" : "w-[96vw]"}`} />
+    </>
   );
 };
 export default SSRVideoSwiper;

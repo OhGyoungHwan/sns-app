@@ -47,6 +47,12 @@ export async function GET() {
       category: true,
       title: true,
       videoId: true,
+      author: {
+        select: {
+          name: true,
+          id: true,
+        },
+      },
     },
     skip: 0,
     take: 10,
@@ -56,7 +62,7 @@ export async function GET() {
 
 // Update
 export async function PUT(req: NextRequest) {
-  const { postId, title, content, category } = await req.json();
+  const { postId, title, content, category, videoId } = await req.json();
 
   const session = await getServerSession(authOptions);
 
@@ -69,6 +75,8 @@ export async function PUT(req: NextRequest) {
         title: title,
         category: category,
         content: content,
+        videoId: videoId,
+        author: { connect: { id: session?.user.id } },
       },
     });
     return NextResponse.json(result);

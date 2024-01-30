@@ -1,8 +1,9 @@
 const Select: React.FC<{
   categorys: { name: string; value: string }[];
   label: string;
+  value: string;
   changeEvent: (value: string) => void;
-}> = ({ categorys, label, changeEvent }) => {
+}> = ({ categorys, label, value, changeEvent }) => {
   return (
     <div className="w-full rounded-sm border border-outline relative">
       <select
@@ -10,6 +11,7 @@ const Select: React.FC<{
         id="category"
         className="w-full bg-surface textBodyLarge text-onSurface px-3 py-2 h-[56px] focus:outline-none"
         onChange={(value) => changeEvent(value.target.value)}
+        value={value}
       >
         {categorys.map((category) => (
           <option key={category.value} value={category.value}>

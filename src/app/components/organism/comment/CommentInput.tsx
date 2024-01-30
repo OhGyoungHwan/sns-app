@@ -10,7 +10,7 @@ const CommentInput: React.FC<{ postId: string }> = ({ postId }) => {
   // 데이터
   const router = useRouter();
   const [comment, setComment] = useState("");
-  const { submitData } = useSubmit("/api/comment", "POST");
+  const { submitData } = useSubmit("/api/comment", "POST", `/post/${postId}`);
   // 계산
   // 액션
   const onChangeComment = (value: string) => setComment(value);

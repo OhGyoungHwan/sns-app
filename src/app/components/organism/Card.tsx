@@ -1,5 +1,4 @@
 "use client";
-import { useSession } from "next-auth/react";
 import Monogram from "../atoms/Monogram";
 import { IPost } from "@/app/api/post/route";
 import Image from "next/image";
@@ -22,15 +21,15 @@ const Card: React.FC<{ post: IPost }> = ({ post }) => {
         height={90}
         src={`https://img.youtube.com/vi/${youTubeId}/mqdefault.jpg`}
       />
-      <div className="flex justify-start items-center flex-grow relative gap-4">
-        <div className="flex flex-row justify-start items-center flex-grow relative gap-1">
-          <span className="text-onSurface material-symbols-outlined mr-2">
-            {category2iconName[post.category]}
-          </span>
-          <h4 className="self-stretch w-full textTitleMedium text-left text-onSurface truncate">
-            {post.title}
-          </h4>
-        </div>
+      <div className="flex flex-row justify-start items-center relative gap-1 grow truncate">
+        <span className="text-onSurface material-symbols-outlined mr-2">
+          {category2iconName[post.category]}
+        </span>
+        <h4 className="self-stretch w-full textTitleMedium text-left text-onSurface truncate">
+          {post.title}
+        </h4>
+      </div>
+      <div>
         <Monogram name={post.author?.name || "익명"} />
       </div>
     </Link>

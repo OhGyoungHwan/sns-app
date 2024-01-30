@@ -1,8 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
-export default function useSubmit(apiUrl: string, method: string) {
+export default function useSubmit(
+  apiUrl: string,
+  method: string,
+  href: string
+) {
   // 데이터
   const router = useRouter();
   // 계산
@@ -14,7 +17,7 @@ export default function useSubmit(apiUrl: string, method: string) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      router.push("/");
+      router.push(href);
     } catch (error) {
       console.error(error);
       alert(error);

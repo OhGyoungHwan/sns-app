@@ -15,7 +15,7 @@ const TextButton: React.FC<{
 }) => {
   return (
     <button
-      className={`flex flex-col justify-center items-center overflow-hidden rounded-sm ${bgColor} ${
+      className={`flex flex-col justify-center items-center overflow-hidden shrink-0 rounded-sm ${bgColor} ${
         border && "border border-outline"
       } ${className}`}
       onClick={onClickEvent}
