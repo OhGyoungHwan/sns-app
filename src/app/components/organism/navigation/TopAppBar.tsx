@@ -17,7 +17,7 @@ const TopAppBar: React.FC<{ onClickMenu: () => void }> = ({ onClickMenu }) => {
 
   return (
     <div
-      className={`fixed z-50 flex flex-row justify-between items-center h-14 w-full bg-surface gap-1.5 px-1 py-2 transition duration-300 ease-in-out ${
+      className={`fixed z-50 flex flex-row justify-between items-center h-14 w-full bg-surface gap-1.5 px-1 py-2 border-b border-outlineVariant transition duration-300 ease-in-out ${
         isScrollUp ? "translate-y-0" : "-translate-y-full"
       }`}
     >

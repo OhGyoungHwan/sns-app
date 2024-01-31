@@ -40,8 +40,15 @@ export async function POST(req: NextRequest) {
 }
 
 // Read
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const { skip, category } = {
+    skip: parseInt(req.nextUrl.searchParams.get("skip") || "0") || 0,
+    category: req.nextUrl.searchParams.get("category") as Category | null,
+  };
   const posts = await prisma.post.findMany({
+    where: {
+      category: category || undefined,
+    },
     select: {
       id: true,
       category: true,
@@ -54,7 +61,7 @@ export async function GET() {
         },
       },
     },
-    skip: 0,
+    skip: skip * 10,
     take: 10,
   });
   return NextResponse.json(posts);
