@@ -77,7 +77,7 @@ const Write: React.FC<{
 
   return (
     <article className="w-full relative min-h-screen expanded:w-[840px] mx-auto">
-      <div className="absolute inset-0 flex flex-col gap-4 px-[16px] pt-[72px] pb-[60px]">
+      <div className="absolute inset-0 flex flex-col gap-4 px-[16px] pt-4 pb-[60px]">
         <div className="w-full grid grid-cols-1 medium:grid-cols-2 gap-4">
           <Select
             categorys={categorys}

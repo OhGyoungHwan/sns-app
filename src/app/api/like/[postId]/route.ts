@@ -16,6 +16,7 @@ export async function POST(
 
   const result = await prisma.like.create({
     data: {
+      id: `${params.postId}${session?.user.id}`,
       post: { connect: { id: params.postId } },
       user: { connect: { id: session?.user.id } },
     },
@@ -41,4 +42,19 @@ export async function GET(
   }
 
   return NextResponse.json({ isLike: false });
+}
+
+// Delete
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { postId: string } }
+) {
+  const session = await getServerSession(authOptions);
+
+  const result = await prisma.like.delete({
+    where: {
+      id: `${params.postId}${session?.user.id}`,
+    },
+  });
+  return NextResponse.json(result);
 }

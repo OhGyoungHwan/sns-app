@@ -43,6 +43,7 @@ const NavigationRail: React.FC<{
             href={`/${data.url}`}
             key={data.name}
             className="group flex flex-col justify-start items-center self-stretch h-14 relative gap-0.5"
+            prefetch={false}
           >
             <div
               className={`px-1 rounded-[100px] relative overflow-hidden ${labelIconBGColor(

@@ -16,7 +16,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, token, user }) {
       session.user = user;
-      return session;
+      return Promise.resolve({ ...session, redirect: "/my" });
     },
   },
 };

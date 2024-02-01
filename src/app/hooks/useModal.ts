@@ -8,13 +8,16 @@ export default function useModal(closeCallback?: () => void) {
   const modalElement =
     typeof window === "object" ? document.getElementById("modal") : null;
   // 계산
-  const closeModal = () => modalElement?.style.setProperty("display", "none");
-  const openModal = () => modalElement?.style.setProperty("display", "block");
+  const closeElement = (element: HTMLElement | null) =>
+    element?.style.setProperty("display", "none");
+  const openElement = (element: HTMLElement | null) =>
+    element?.style.setProperty("display", "block");
   //   액션
+  const openModal = () => openElement(modalElement);
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-        closeModal();
+        closeElement(modalElement);
         closeCallback && closeCallback();
       }
     };

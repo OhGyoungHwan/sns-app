@@ -4,6 +4,7 @@ import { IPost } from "@/app/api/post/route";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Cards from "./Cards";
+import Loading from "../atoms/Loading";
 
 async function getPost(skip?: string) {
   const res = await fetch(`/api/post?skip=${skip}`, {
@@ -40,7 +41,9 @@ const InfiniteCards: React.FC<{ defaultSkip: number }> = ({ defaultSkip }) => {
           마지막 컨텐츠 입니다...
         </p>
       ) : (
-        <div ref={ref}></div>
+        <div ref={ref} className="w-full flex justify-center items-center">
+          <Loading />
+        </div>
       )}
     </>
   );

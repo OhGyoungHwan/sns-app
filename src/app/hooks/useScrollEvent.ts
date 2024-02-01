@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { throttle } from "lodash";
+import { useInView } from "react-intersection-observer";
 
 export default function useScrollEvent() {
   // 데이터
@@ -9,11 +10,11 @@ export default function useScrollEvent() {
   // 액션
   useEffect(() => {
     const threshold = 0;
-    let lastScrollY = window.pageYOffset;
+    let lastScrollY = window.scrollY;
     let ticking = false;
 
     const updateScrollDir = () => {
-      const scrollY = window.pageYOffset;
+      const scrollY = window.scrollY;
 
       if (Math.abs(scrollY - lastScrollY) < threshold) {
         ticking = false;
@@ -25,7 +26,6 @@ export default function useScrollEvent() {
     };
 
     const onScroll = () => {
-      console.log("!!!!!");
       if (!ticking) {
         window.requestAnimationFrame(updateScrollDir);
         ticking = true;
@@ -38,5 +38,5 @@ export default function useScrollEvent() {
     return () => window.removeEventListener("scroll", scrollFunc);
   }, [isScrollUp]);
 
-  return { isScrollUp };
+  return { isScrollUp, setIsScrollUp };
 }
