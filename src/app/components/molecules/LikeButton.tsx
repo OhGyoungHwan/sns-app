@@ -4,11 +4,10 @@ import { useSession } from "next-auth/react";
 import IconButton from "../atoms/IconButton";
 import useSubmit from "@/app/hooks/useSubmit";
 import { use, useEffect, useState } from "react";
-import { ILike } from "@/app/api/like/[postId]/route";
 import useLoading from "@/app/hooks/useLoading";
 
-async function getLike(postId: string) {
-  const res = await fetch(`/api/like/${postId}`, {
+async function getLike(postId: number) {
+  const res = await fetch(`/api/post/${postId}/like`, {
     cache: "no-store",
   });
   if (!res.ok) {
@@ -17,29 +16,29 @@ async function getLike(postId: string) {
   return res.json();
 }
 
-const LikeButton: React.FC<{ postId: string }> = ({ postId }) => {
+const LikeButton: React.FC<{ postId: number }> = ({ postId }) => {
   // 데이터
   const [isLike, setIsLike] = useState<boolean | undefined>(undefined);
   const { data: session } = useSession();
   const { setIsOnLoading } = useLoading();
   const { submitData: submitDataLike, isError: isLikeError } = useSubmit(
-    `/api/like/${postId}`,
+    `/api/like`,
     "POST",
     `/post/${postId}`
   );
   const { submitData: submitDataUnLike, isError: isUnLikeError } = useSubmit(
-    `/api/like/${postId}`,
+    `/api/like`,
     "DELETE",
     `/post/${postId}`
   );
   // 계산
   // 액션
   const onClickUnLikeButton = () => {
-    submitDataUnLike({});
+    submitDataUnLike({ postId: postId });
     !isLikeError && setIsLike(false);
   };
   const onClickLikeButton = () => {
-    submitDataLike({});
+    submitDataLike({ postId: postId });
     !isUnLikeError && setIsLike(true);
   };
 
@@ -47,7 +46,7 @@ const LikeButton: React.FC<{ postId: string }> = ({ postId }) => {
     setIsOnLoading(true);
     const likePromise = getLike(postId);
     likePromise
-      .then((data: ILike) => setIsLike(data.isLike))
+      .then((data: { isLike: boolean }) => setIsLike(data.isLike))
       .catch((error) => alert(error));
     setIsOnLoading(false);
   }, [postId]);

@@ -1,10 +1,10 @@
 "use client";
 
-import { IPost } from "@/app/api/post/route";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Cards from "./Cards";
 import Loading from "../atoms/Loading";
+import { IPost } from "@/app/types/type";
 
 async function getPost(skip?: string) {
   const res = await fetch(`/api/post?skip=${skip}`, {

@@ -1,42 +1,25 @@
 import prisma from "@/app/lib/prisma";
-import { Category } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-
-export interface IPost {
-  id: string;
-  category: Category;
-  title: string;
-  content: string;
-  published: boolean;
-  videoId: string;
-  authorId: string | null;
-  author: {
-    name: string | null;
-  } | null;
-  comments: {
-    content: string;
-    userId: string;
-  }[];
-}
 
 // Read
 export async function GET(
   req: NextRequest,
   { params }: { params: { postId: string } }
 ) {
-  const posts = await prisma.post.findFirst({
+  const post = await prisma.post.findFirst({
     where: {
-      id: params.postId,
+      id: parseInt(params.postId),
     },
     select: {
       id: true,
       category: true,
       title: true,
       content: true,
-      published: true,
       videoId: true,
-      authorId: true,
-      author: {
+      userId: true,
+      like: true,
+      view: true,
+      user: {
         select: {
           name: true,
           id: true,
@@ -44,5 +27,13 @@ export async function GET(
       },
     },
   });
-  return NextResponse.json(posts);
+  await prisma.post.update({
+    where: {
+      id: parseInt(params.postId),
+    },
+    data: {
+      view: { increment: 1 },
+    },
+  });
+  return NextResponse.json(post);
 }

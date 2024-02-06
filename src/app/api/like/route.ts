@@ -1,91 +1,63 @@
-import { authOptions } from "@/app/lib/authOptions";
+import { AuthenticationCheck, authOptions } from "@/app/lib/authOptions";
 import prisma from "@/app/lib/prisma";
-import { Category } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-export interface ILikePost {
-  post: {
-    id: string;
-    category: string;
-    title: string;
-    videoId: string;
-    author: {
-      name: string;
-      id: string;
-    };
-  };
-}
-
 // Create
 export async function POST(req: NextRequest) {
-  const { postId } = await req.json();
+  const { postId }: { postId: number } = await req.json();
 
   const session = await getServerSession(authOptions);
 
-  const result = await prisma.like.create({
-    data: {
-      post: { connect: { id: postId } },
-      user: { connect: { id: session?.user.id } },
-    },
-  });
-  return NextResponse.json(result);
-}
-
-// Read
-export async function GET() {
-  const session = await getServerSession(authOptions);
-
-  const posts = await prisma.like.findMany({
-    where: {
-      userId: session?.user.id,
-    },
-    skip: 0,
-    take: 10,
-    select: {
-      post: {
-        select: {
-          id: true,
-          category: true,
-          title: true,
-          videoId: true,
-          author: {
-            select: {
-              name: true,
-              id: true,
-            },
-          },
-        },
+  if (session) {
+    const result = await prisma.like.create({
+      data: {
+        id: `${postId}-${session.user.id}`,
+        post: { connect: { id: postId } },
+        user: { connect: { id: session?.user.id } },
       },
-    },
-  });
-  return NextResponse.json(posts);
+    });
+    const increaseLike = await prisma.post.update({
+      where: {
+        id: postId,
+      },
+      data: {
+        like: { increment: 1 },
+      },
+    });
+    return result && increaseLike
+      ? NextResponse.json({ message: "성공" })
+      : NextResponse.json({ error: "서버 오류" }, { status: 500 });
+  } else {
+    return NextResponse.json({ error: "로그인 오류" }, { status: 401 });
+  }
 }
 
 // Delete
 export async function DELETE(req: NextRequest) {
-  const { likeId } = await req.json();
+  const { postId }: { postId: number } = await req.json();
 
   const session = await getServerSession(authOptions);
+  const authentication = await AuthenticationCheck("like", postId);
 
-  if (await AuthenticationCheck(likeId, session?.user.id)) {
+  if (authentication) {
     const result = await prisma.like.delete({
       where: {
-        id: likeId,
+        id: `${postId}-${session?.user.id}`,
       },
     });
-    return NextResponse.json(result);
+    const reduceLike = await prisma.post.update({
+      where: {
+        id: postId,
+      },
+      data: {
+        like: { increment: -1 },
+      },
+    });
+    return result && reduceLike
+      ? NextResponse.json({ message: "성공" })
+      : NextResponse.json({ error: "서버 오류" }, { status: 500 });
   } else {
-    return NextResponse.json({ error: "권한 오류" });
+    return NextResponse.json({ error: "권한 오류" }, { status: 401 });
   }
 }
-
-const AuthenticationCheck = async (likeId: string, userId?: string) => {
-  const post = await prisma.like.findFirst({
-    where: {
-      id: likeId,
-      userId: userId,
-    },
-  });
-  return post;
-};

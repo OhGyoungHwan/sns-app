@@ -6,7 +6,7 @@ import useSubmit from "@/app/hooks/useSubmit";
 import { useRouter } from "next/navigation";
 import TextButton from "../../atoms/TextButton";
 
-const CommentInput: React.FC<{ postId: string }> = ({ postId }) => {
+const CommentInput: React.FC<{ postId: number }> = ({ postId }) => {
   // 데이터
   const router = useRouter();
   const [comment, setComment] = useState("");

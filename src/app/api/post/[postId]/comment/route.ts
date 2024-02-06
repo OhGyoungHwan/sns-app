@@ -1,25 +1,14 @@
 import prisma from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export interface IComment {
-  id: string;
-  userId: string;
-  postId: string;
-  content: string;
-  user: {
-    id: string;
-    name: string | null;
-  };
-}
-
 // Read
 export async function GET(
   req: NextRequest,
   { params }: { params: { postId: string } }
 ) {
-  const posts = await prisma.comment.findMany({
+  const comments = await prisma.comment.findMany({
     where: {
-      postId: params.postId,
+      postId: parseInt(params.postId),
     },
     include: {
       user: {
@@ -30,5 +19,5 @@ export async function GET(
       },
     },
   });
-  return NextResponse.json(posts);
+  return NextResponse.json(comments);
 }

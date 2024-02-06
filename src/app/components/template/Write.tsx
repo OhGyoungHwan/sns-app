@@ -20,7 +20,7 @@ const categorys = categoryKeys.map((category) => {
 });
 
 const Write: React.FC<{
-  postId?: string;
+  postId?: number;
   isReWrite?: boolean;
   defaultTitle?: string;
   defaultYouTubeUrl?: string;

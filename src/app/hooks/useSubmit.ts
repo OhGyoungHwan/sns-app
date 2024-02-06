@@ -14,7 +14,7 @@ export default function useSubmit(
   const [isError, setIsError] = useState(false);
   // 계산
   // 액션
-  const submitData = async (body: { [key: string]: string }) => {
+  const submitData = async (body: { [key: string]: string | number }) => {
     setIsOnLoading(true);
     try {
       await fetch(apiUrl, {

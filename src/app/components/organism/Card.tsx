@@ -1,9 +1,9 @@
 "use client";
 import Monogram from "../atoms/Monogram";
-import { IPost } from "@/app/api/post/route";
 import Image from "next/image";
 import { category2iconName } from "@/app/lib/const";
 import Link from "next/link";
+import { IPost } from "@/app/types/type";
 
 const Card: React.FC<{ post: IPost }> = ({ post }) => {
   // 데이터
@@ -14,6 +14,8 @@ const Card: React.FC<{ post: IPost }> = ({ post }) => {
     <Link
       href={`/post/${post.id}`}
       className="flex justify-start items-center self-stretch overflow-hidden gap-4 pr-4 border border-outline rounded-xl"
+      prefetch={false}
+      scroll={false}
     >
       <Image
         alt={`${post.title} 대표 이미지`}
@@ -25,12 +27,28 @@ const Card: React.FC<{ post: IPost }> = ({ post }) => {
         <span className="text-onSurface material-symbols-outlined mr-2">
           {category2iconName[post.category]}
         </span>
-        <h4 className="self-stretch w-full textTitleMedium text-left text-onSurface truncate">
-          {post.title}
-        </h4>
+        <div className="self-stretch w-full truncate">
+          <h4 className="textTitleMedium text-left text-onSurface truncate">
+            {post.title}
+          </h4>
+          <p className="w-full flex flex-row gap-2 text-outlineVariant textLabelMediumProminent">
+            <span className="flex flex-row items-center gap-1">
+              <span className="material-symbols-outlined text-[16px]">
+                visibility
+              </span>
+              {post.view}
+            </span>
+            <span className="flex flex-row items-center gap-1">
+              <span className="material-symbols-outlined text-[16px]">
+                favorite
+              </span>
+              {post.like}
+            </span>
+          </p>
+        </div>
       </div>
       <div>
-        <Monogram name={post.author?.name || "익명"} />
+        <Monogram name={post.user?.name || "익명"} />
       </div>
     </Link>
   );

@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { throttle } from "lodash";
-import { useInView } from "react-intersection-observer";
 
 export default function useScrollEvent() {
   // 데이터

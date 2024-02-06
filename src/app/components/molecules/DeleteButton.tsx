@@ -2,7 +2,7 @@
 import useSubmit from "@/app/hooks/useSubmit";
 import TextButton from "../atoms/TextButton";
 
-const DeleteButton: React.FC<{ postId: string }> = ({ postId }) => {
+const DeleteButton: React.FC<{ postId: number }> = ({ postId }) => {
   // 데이터
   const { submitData } = useSubmit("/api/post", "DELETE", "/");
   // 계산

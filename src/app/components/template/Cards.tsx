@@ -1,4 +1,4 @@
-import { IPost } from "@/app/api/post/route";
+import { IPost } from "@/app/types/type";
 import Card from "../organism/Card";
 
 const Cards: React.FC<{ posts: IPost[] }> = ({ posts }) => {

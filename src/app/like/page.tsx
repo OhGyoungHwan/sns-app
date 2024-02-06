@@ -2,11 +2,14 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../lib/authOptions";
 import AccessDenied from "../components/template/AccessDenied";
 import Cards from "../components/template/Cards";
-import { IPost } from "../api/post/route";
+import { IPost } from "../types/type";
+import { headers } from "next/headers";
 
 async function getLikePost() {
-  const res = await fetch(`${process.env.BASE_URL}/api/like`, {
+  const res = await fetch(`${process.env.BASE_URL}/api/user/like`, {
     cache: "no-store",
+    method: "GET",
+    headers: headers(),
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -15,10 +18,10 @@ async function getLikePost() {
 }
 
 export default async function LikePage() {
-  const likePosts = (await getLikePost()) as { post: IPost }[];
-  const posts = likePosts.map((likePost) => likePost.post) as IPost[];
   const session = await getServerSession(authOptions);
-  if (session?.user) {
+  if (session) {
+    const likePosts = (await getLikePost()) as { post: IPost }[];
+    const posts = likePosts.map((likePost) => likePost.post) as IPost[];
     return <Cards posts={posts} />;
   }
   return <AccessDenied />;

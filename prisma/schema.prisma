@@ -21,23 +21,23 @@ enum Category {
 }
 
 model Post {
-  id        String     @default(cuid()) @id
+  id        Int     @id @default(autoincrement())
   category  Category @default(ETC)
   title     String
   content   String
   videoId String
-  // 임시 저장 구분 용
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
+  userId  String
+  like Int @default(0)
+  view Int @default(0)
+  user    User?   @relation(fields: [userId], references: [id])
   comments Comment[]
   Likes Like[]
 }
 
 model Comment {
-  id  String     @default(cuid()) @id
+  id  Int     @id @default(autoincrement())
   userId             String
-  postId         String
+  postId         Int
   content String
   user User @relation(fields:[userId], references:[id], onDelete: Cascade)
   post Post @relation(fields:[postId], references:[id], onDelete: Cascade)
@@ -46,7 +46,7 @@ model Comment {
 model Like {
   id String @default(cuid()) @id
   userId String
-  postId String
+  postId Int
   user User @relation(fields:[userId], references:[id], onDelete: Cascade)
   post Post @relation(fields:[postId], references:[id], onDelete: Cascade)
 }

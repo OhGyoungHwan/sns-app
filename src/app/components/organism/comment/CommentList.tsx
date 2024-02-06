@@ -1,8 +1,8 @@
+import { ICommentUser } from "@/app/types/type";
 import Monogram from "../../atoms/Monogram";
-import { IComment } from "@/app/api/comment/route";
 import DeleteCommentButton from "../../molecules/DeleteCommentButton";
 
-const CommentList: React.FC<{ commentList: IComment[] }> = async ({
+const CommentList: React.FC<{ commentList: ICommentUser[] }> = async ({
   commentList,
 }) => {
   return (

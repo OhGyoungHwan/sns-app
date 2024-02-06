@@ -12,8 +12,8 @@ select {
   width: auto !important;
 }
 
-.swiper-pagination.swiper-pagination-fraction {
-  @apply hidden group-hover:block pointer-events-none;
+.swiper-pagination.swiper-pagination-custom {
+  @apply hidden group-hover:block pointer-events-none text-primary;
 }
 
 .quill {

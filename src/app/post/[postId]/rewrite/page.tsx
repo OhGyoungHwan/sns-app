@@ -1,5 +1,5 @@
-import { IPost } from "@/app/api/post/route";
 import Write from "@/app/components/template/Write";
+import { IPost } from "@/app/types/type";
 
 async function getPost(postId: string) {
   const res = await fetch(`${process.env.BASE_URL}/api/post/${postId}`, {

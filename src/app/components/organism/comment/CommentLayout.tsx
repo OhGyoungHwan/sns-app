@@ -1,13 +1,13 @@
-import { IComment } from "@/app/api/comment/[postId]/route";
 import CommentInput from "./CommentInput";
 import CommentList from "./CommentList";
 import { authOptions } from "@/app/lib/authOptions";
 import { getServerSession } from "next-auth";
 import LoginBar from "../../molecules/LoginBar";
+import { ICommentUser } from "@/app/types/type";
 
 const CommentLayout: React.FC<{
-  postId: string;
-  commentList: IComment[];
+  postId: number;
+  commentList: ICommentUser[];
 }> = async ({ postId, commentList }) => {
   // 데이터
   const session = await getServerSession(authOptions);

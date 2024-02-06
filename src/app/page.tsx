@@ -1,6 +1,6 @@
-import { IPost } from "./api/post/route";
 import Cards from "./components/template/Cards";
 import InfiniteCards from "./components/template/InfiniteCards";
+import { IPost } from "./types/type";
 
 async function getPost(skip?: string) {
   const res = await fetch(`${process.env.BASE_URL}/api/post?skip=${skip}`, {
