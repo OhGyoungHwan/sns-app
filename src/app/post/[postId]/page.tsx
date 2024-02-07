@@ -17,7 +17,7 @@ async function getComments(postId: string) {
   const res = await fetch(
     `${process.env.BASE_URL}/api/post/${postId}/comment`,
     {
-      next: { revalidate: 60 },
+      cache: "no-store",
     }
   );
   if (!res.ok) {
