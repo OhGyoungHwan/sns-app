@@ -6,11 +6,11 @@ import { IPost } from "../types/type";
 import { headers } from "next/headers";
 
 async function getLikePost() {
-  const headersList = headers();
+  const cookie = headers().get("Cookie");
   const res = await fetch(`${process.env.BASE_URL}/api/user/like`, {
     cache: "no-store",
     method: "GET",
-    headers: headersList,
+    headers: { Cookie: cookie || "" },
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
