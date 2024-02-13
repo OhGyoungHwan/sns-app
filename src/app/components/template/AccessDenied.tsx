@@ -9,7 +9,7 @@ const AccessDenied: React.FC = () => {
   // 액션
   const onClickLoginButton = () => signIn("kakao");
   return (
-    <article className="w-full max-w-[840px] absolute inset-0 flex flex-col items-center justify-center gap-4">
+    <article className="w-full max-w-[840px] mx-auto absolute inset-0 flex flex-col items-center justify-center gap-4">
       <h1 className="textHeadlineMedium text-onSurface">
         {session ? "권한 오류" : "로그인 필요"}
       </h1>
