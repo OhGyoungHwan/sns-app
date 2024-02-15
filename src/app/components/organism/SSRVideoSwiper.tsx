@@ -12,6 +12,7 @@ const SSRVideoSwiper: React.FC<{ slideElementList: React.ReactNode[] }> = ({
   // 데이터
   const [isRow, setIsRow] = useState(false);
   const swiperRef = useRef<SwiperRef>(null);
+  const swiperContainer = useRef<HTMLDivElement>(null);
   const youtubeIframe =
     typeof window === "object"
       ? (document.getElementsByClassName(
@@ -31,11 +32,22 @@ const SSRVideoSwiper: React.FC<{ slideElementList: React.ReactNode[] }> = ({
     );
   // 액션
   const onClickPrev = () => (
-    swiperRef.current?.swiper.slidePrev(), pauseYoutubeIframe(youtubeIframe)
+    swiperRef.current?.swiper.slidePrev(),
+    pauseYoutubeIframe(youtubeIframe),
+    swiperContainer.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
   );
   const onClickNext = () => (
-    swiperRef.current?.swiper.slideNext(), pauseYoutubeIframe(youtubeIframe)
+    swiperRef.current?.swiper.slideNext(),
+    pauseYoutubeIframe(youtubeIframe),
+    swiperContainer.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
   );
+
   useEffect(() => {
     const resizeListener = () => {
       if ((window.innerWidth - 32) / 16 > (window.innerHeight - 56) / 9) {
@@ -63,7 +75,7 @@ const SSRVideoSwiper: React.FC<{ slideElementList: React.ReactNode[] }> = ({
           },
         }}
         modules={[Pagination]}
-        className={`z-30 group aspect-video mt-[58px] ${
+        className={`z-30 group aspect-video mt-[74px] ${
           isRow ? "h-[100vh]" : "w-[96vw]"
         }`}
         style={{ position: "absolute" }}
@@ -86,7 +98,10 @@ const SSRVideoSwiper: React.FC<{ slideElementList: React.ReactNode[] }> = ({
           />
         </div>
       </Swiper>
-      <div className={`aspect-video ${isRow ? "h-[100vh]" : "w-[96vw]"}`} />
+      <div
+        ref={swiperContainer}
+        className={`aspect-video ${isRow ? "h-[100vh]" : "w-[96vw]"}`}
+      />
     </>
   );
 };
